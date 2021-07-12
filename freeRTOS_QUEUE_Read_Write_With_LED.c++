@@ -1,4 +1,3 @@
-
 #include <Arduino.h>
 #include <Arduino_FreeRTOS.h>
 #include <queue.h>
@@ -13,7 +12,6 @@ void task1 (void *parameter)
   // vtaskDelay(pdMS_TO_TICKS(1000))
   unsigned long x = 500;
   xQueueSendToFront( xQueue1, &x, 10);
- 
   }
 }
 void task2 (void *parameter)
@@ -23,10 +21,10 @@ void task2 (void *parameter)
   unsigned long recievedvalue = 0;
   xQueueReceive(xQueue1, &recievedvalue, 10);
   Serial.println(recievedvalue);
-  digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
-  delay(500);                       // wait for a second
-  digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
-  delay(500);
+  digitalWrite(LED_BUILTIN, HIGH);
+  vTaskDelay(pdMS_TO_TICKS(1000));
+  digitalWrite(LED_BUILTIN, LOW);
+  vTaskDelay(pdMS_TO_TICKS(1000));
   }
 }
 void setup() 
